@@ -2,6 +2,7 @@ import {Container, Fade} from "@mui/material";
 import React from "react";
 import Sidebar from "@/src/sections/sidebar";
 import Box from "@mui/material/Box";
+import {useRouter} from "next/router";
 
 interface ILayout {
     children: React.ReactNode
@@ -15,14 +16,17 @@ const containerCenter = {
 }
 
 export default function Layout({ children } : ILayout) {
+    const router = useRouter();
     return (
-        <Fade in>
             <Box sx={{display: "flex"}}>
                 <Sidebar/>
                 <Container component="main" sx={containerCenter}>
-                    {children}
+                    <Fade in key={router.pathname} timeout={500}>
+                        <div>
+                            {children}
+                        </div>
+                    </Fade>
                 </Container>
             </Box>
-        </Fade>
     );
 }
