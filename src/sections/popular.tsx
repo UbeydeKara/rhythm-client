@@ -1,5 +1,5 @@
 import {Box, Typography, Unstable_Grid2 as Grid} from "@mui/material";
-import {popularArtists} from "@/src/constants/popular-artists";
+import {popularArtists} from "@/src/mock/popular-artists";
 import SweetCard from "@/src/components/SweetCard";
 
 export default function Popular() {
@@ -11,7 +11,7 @@ export default function Popular() {
             <Grid container mt={1} spacing={8} justifyContent={{xs: "center", lg: "start"}}>
                 {popularArtists.map((item) =>
                     <Grid key={item.id} sx={{position: "relative"}}>
-                        <SweetCard title={item.artist} subtitle={item.song} imgSrc={item.img}/>
+                        <SweetCard item={item}/>
                     </Grid>
                 )}
             </Grid>

@@ -10,7 +10,7 @@ import SweetCard from "../components/SweetCard";
 // mui
 import {Box, IconButton, Stack, Typography, Unstable_Grid2 as Grid} from "@mui/material";
 import {PlayArrow} from "@mui/icons-material";
-import {popularAlbums} from "@/src/constants/popular-albums";
+import {popularAlbums} from "@/src/mock/popular-albums";
 
 const iconButtonStyle = {
     bgcolor: "primary.main",
@@ -49,7 +49,7 @@ export default function Albums() {
                 <Grid container mt={1} spacing={8} justifyContent={{xs: "center", lg: "start"}}>
                     {popularAlbums.map((item) =>
                         <Grid key={item.id} sx={{position: "relative"}}>
-                            <SweetCard title={item.artist} subtitle={item.song} imgSrc={item.img}/>
+                            <SweetCard item={item}/>
                         </Grid>
                     )}
                 </Grid>

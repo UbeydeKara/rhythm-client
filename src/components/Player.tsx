@@ -1,6 +1,7 @@
-import {Avatar, IconButton, Slider, Stack, Typography} from "@mui/material";
+import {Avatar, IconButton, Slide, Slider, Stack, Typography} from "@mui/material";
 import Box from "@mui/material/Box";
-import {Pause, VolumeUp, SkipPrevious, SkipNext} from "@mui/icons-material";
+import {Pause, VolumeUp, SkipPrevious, SkipNext, PlayArrow, VolumeOff} from "@mui/icons-material";
+import usePlayer from "@/src/hooks/usePlayer";
 
 const stackStyle = {
     color: "white",
@@ -28,30 +29,43 @@ const sliderStyle = {
 };
 
 export default function Player() {
+    const player = usePlayer();
+
+    const handleOffsetChange = (event: Event, newValue: number | number[]) => {
+        player.updateOffset(newValue as number);
+    };
+
     return (
-        <Stack direction="row" sx={stackStyle} alignItems="center">
-            <Avatar/>
+        <Slide direction="up" in={player.song.id !== undefined} mountOnEnter unmountOnExit>
+            <Stack direction="row" sx={stackStyle} alignItems="center">
+                <Avatar src={player.song.img}/>
 
-            <Box ml={2} width={200}>
-                <Typography variant="subtitle2">Song Title</Typography>
-                <Typography variant="body2">Author</Typography>
-            </Box>
+                <Box ml={2} width={200}>
+                    <Typography variant="subtitle2">{player.song.title}</Typography>
+                    <Typography variant="body2">{player.song.artist}</Typography>
+                </Box>
 
-            <IconButton color="inherit">
-                <SkipPrevious/>
-            </IconButton>
-            <IconButton color="inherit">
-                <Pause/>
-            </IconButton>
-            <IconButton color="inherit">
-                <SkipNext/>
-            </IconButton>
+                <IconButton color="inherit">
+                    <SkipPrevious/>
+                </IconButton>
+                {player.isPLaying ?
+                    <IconButton color="inherit" onClick={player.pauseSong}>
+                        <Pause/>
+                    </IconButton>
+                    :
+                    <IconButton color="inherit" onClick={player.resumeSong}>
+                        <PlayArrow/>
+                    </IconButton>}
+                <IconButton color="inherit">
+                    <SkipNext/>
+                </IconButton>
 
-            <Slider sx={sliderStyle}></Slider>
+                <Slider sx={sliderStyle} max={player.song.duration} value={player.offset} step={1} onChange={handleOffsetChange}></Slider>
 
-            <IconButton color="inherit" sx={{mx: 2}}>
-                <VolumeUp/>
-            </IconButton>
-        </Stack>
+                <IconButton color="inherit" sx={{mx: 2}} onClick={player.toggleMute}>
+                    {player.isMuted ? <VolumeOff/> : <VolumeUp/>}
+                </IconButton>
+            </Stack>
+        </Slide>
     );
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 // theme
 import ThemeProvider from '../theme';
+import {PlayerProvider} from "@/src/contexts/PlayerContext";
 
 // ----------------------------------------------------------------------
 
@@ -20,9 +21,11 @@ export default function MyApp(props: any) {
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
             </Head>
 
+        <PlayerProvider>
             <ThemeProvider>
                 {getLayout(<Component {...pageProps} />)}
             </ThemeProvider>
+        </PlayerProvider>
 
         </>);
 }

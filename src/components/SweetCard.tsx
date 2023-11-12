@@ -1,10 +1,10 @@
 import {Box, Card, CardActionArea, CardActions, CardMedia, Typography} from "@mui/material";
 import React from "react";
+import {SongType} from "@/src/types/SongType";
+import usePlayer from "@/src/hooks/usePlayer";
 
 interface ISweetCard extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    title: string,
-    subtitle: string,
-    imgSrc: string
+    item: SongType
 }
 
 const cardHeight = 240;
@@ -34,7 +34,12 @@ const cardContentStyle = {
     },
 }
 
-export default function SweetCard({title, subtitle, imgSrc, ...props} : ISweetCard) {
+export default function SweetCard({item} : ISweetCard) {
+    const player = usePlayer();
+
+    const playCard = () => {
+        player.playSong(item);
+    };
 
     const cardEffect = (
         <Box
@@ -42,27 +47,27 @@ export default function SweetCard({title, subtitle, imgSrc, ...props} : ISweetCa
             component="img"
             height={cardHeight}
             width={cardWidth}
-            src={imgSrc}
-            alt={title}
+            src={item.img}
+            alt={item.title}
         />
     );
 
     return(
-        <div {...props}>
-            <Card sx={cardContentStyle}>
+        <div>
+            <Card sx={cardContentStyle} onClick={playCard}>
                 <CardActionArea sx={{height: cardHeight}}>
                     <CardMedia
                         component="img"
                         height="100%"
                         width={cardWidth}
-                        image={imgSrc}
+                        image={item.img}
                         sx={{objectFit: "fill"}}
-                        alt={title}>
+                        alt={item.title}>
                     </CardMedia>
                     <CardActions sx={cardFooterStyle}>
                         <Box textAlign="center" width="100%" color="white">
-                            <Typography fontWeight="bold">{title}</Typography>
-                            <Typography variant="body2" fontWeight={100}>{subtitle}</Typography>
+                            <Typography fontWeight="bold">{item.title}</Typography>
+                            <Typography variant="body2" fontWeight={100}>{item.artist}</Typography>
                         </Box>
                     </CardActions>
                 </CardActionArea>

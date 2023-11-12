@@ -13,7 +13,7 @@ import {
 
 // mui
 import {
-    Drawer,
+    Drawer, Grow,
     List,
     ListItem,
     ListItemButton,
@@ -32,6 +32,7 @@ import {OverridableComponent} from "@mui/types";
 
 // components
 import Box from "@mui/material/Box";
+import usePlayer from "@/src/hooks/usePlayer";
 
 const drawerWidth = 240;
 
@@ -62,6 +63,7 @@ interface IButtons {
 
 export default function Sidebar() {
     const router = useRouter();
+    const player = usePlayer();
 
     const SweetItem = useCallback((item: IButtons) => {
         const IconComponent = item.icon;
@@ -100,9 +102,11 @@ export default function Sidebar() {
                 {discoverButtons.map((item) => SweetItem(item))}
             </List>
 
-            <Box display="flex" justifyContent="center" width="100%" mt="auto" mb={8}>
-                <div id="player"/>
-            </Box>
+            <Grow in={player.song.id !== undefined}>
+                <Box display="flex" justifyContent="center" width="100%" mt="auto" mb={8} borderRadius={2} overflow="hidden">
+                    <div id="player"/>
+                </Box>
+            </Grow>
         </Drawer>
     )
 }
