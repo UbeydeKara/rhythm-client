@@ -5,11 +5,11 @@ import {
     Stack,
     Typography
 } from "@mui/material";
-import {popularArtists} from "@/src/constants/popular-artists";
 import SweetCard from "@/src/components/SweetCard";
 import {PlayArrow} from "@mui/icons-material";
 import {ShuffleIcon} from "@/src/theme/overrides/CustomIcons";
 import {recentArtists} from "@/src/constants/recent-artists";
+import useYoutube from "@/src/hooks/useYoutube";
 
 const iconButtonStyle = {
     bgcolor: "primary.main",
@@ -20,6 +20,13 @@ const iconButtonStyle = {
 }
 
 export default function Recent() {
+    const ytPlayer = useYoutube();
+
+    const playSong = (item: any) => {
+        ytPlayer.playVideo(item.source);
+        document.title = `${item.song} - ${item.artist} | Rhythm`;
+    }
+
     return (
         <Box component="section" mt={6}>
             <Stack direction="row" alignItems="center">
@@ -39,7 +46,11 @@ export default function Recent() {
             <Grid container mt={1} spacing={8} justifyContent={{xs: "center", lg: "start"}}>
                 {recentArtists.map((item) =>
                     <Grid key={item.id} sx={{position: "relative"}}>
-                        <SweetCard title={item.artist} subtitle={item.song} imgSrc={item.img}/>
+                        <SweetCard
+                            title={item.artist}
+                            subtitle={item.song}
+                            imgSrc={item.img}
+                            onClick={() => playSong(item)}/>
                     </Grid>
                 )}
             </Grid>

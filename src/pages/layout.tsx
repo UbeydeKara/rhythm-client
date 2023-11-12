@@ -3,6 +3,7 @@ import React from "react";
 import Sidebar from "@/src/sections/sidebar";
 import Box from "@mui/material/Box";
 import {useRouter} from "next/router";
+import Player from "@/src/components/Player";
 
 interface ILayout {
     children: React.ReactNode
@@ -12,7 +13,7 @@ const containerCenter = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    py: 8
+    py: 6
 }
 
 export default function Layout({ children } : ILayout) {
@@ -27,6 +28,7 @@ export default function Layout({ children } : ILayout) {
                         </div>
                     </Fade>
                 </Container>
+                <Player/>
             </Box>
     );
 }

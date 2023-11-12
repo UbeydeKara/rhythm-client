@@ -1,4 +1,6 @@
-import * as React from 'react';
+import {useCallback} from "react";
+
+// icons
 import {
     FavoriteTwoTone,
     LibraryMusic,
@@ -8,14 +10,35 @@ import {
     StorefrontTwoTone,
     Subscriptions, WebAssetTwoTone
 } from "@mui/icons-material";
-import {Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
+
+// mui
+import {
+    Drawer,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    SvgIconTypeMap,
+    Typography
+} from "@mui/material";
+
+// next
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {useCallback} from "react";
+
+// types
+import {OverridableComponent} from "@mui/types";
+
+// components
+import Box from "@mui/material/Box";
 
 const drawerWidth = 240;
 
-const icons = [Subscriptions, Person2, LibraryMusic, MusicNote, StorefrontTwoTone, RadioButtonCheckedTwoTone, FavoriteTwoTone, WebAssetTwoTone]
+const icons = [
+    Subscriptions, Person2, LibraryMusic, MusicNote, StorefrontTwoTone, RadioButtonCheckedTwoTone,
+    FavoriteTwoTone, WebAssetTwoTone
+]
 
 const libraryButtons = [
     { id: 0, text: 'Playlists', icon: icons[0], to: "/playlists" },
@@ -30,10 +53,17 @@ const discoverButtons = [
     { id: 7, text: 'Browse', icon: icons[7], to: "/browse" }
 ]
 
+interface IButtons {
+    id: number,
+    text: string,
+    icon: OverridableComponent<SvgIconTypeMap>,
+    to: string
+}
+
 export default function Sidebar() {
     const router = useRouter();
 
-    const SweetItem = useCallback((item: typeof libraryButtons[0]) => {
+    const SweetItem = useCallback((item: IButtons) => {
         const IconComponent = item.icon;
         const color = router.pathname === item.to ? "primary.main" : "inherit";
         return(
@@ -53,6 +83,7 @@ export default function Sidebar() {
                 width: drawerWidth,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
+                    p: 3,
                     bgcolor: "divider",
                     width: drawerWidth,
                     boxSizing: 'border-box',
@@ -60,14 +91,18 @@ export default function Sidebar() {
             }}
             variant="permanent"
             anchor="left">
-            <List sx={{p: 3, color: "text.secondary"}}>
+            <List sx={{color: "text.secondary"}}>
                 <Typography variant="subtitle2" sx={{ml: 2, my: 2}}>LIBRARY</Typography>
                 {libraryButtons.map((item) => SweetItem(item))}
             </List>
-            <List sx={{px: 3, color: "text.secondary"}}>
+            <List sx={{color: "text.secondary"}}>
                 <Typography variant="subtitle2" sx={{ml: 2, my: 2}}>DISCOVER</Typography>
                 {discoverButtons.map((item) => SweetItem(item))}
             </List>
+
+            <Box display="flex" justifyContent="center" width="100%" mt="auto" mb={8}>
+                <div id="player"/>
+            </Box>
         </Drawer>
     )
 }

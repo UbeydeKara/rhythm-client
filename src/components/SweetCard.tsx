@@ -1,6 +1,7 @@
-import {Box, Card, CardActionArea, CardActions, CardMedia, styled, Typography} from "@mui/material";
+import {Box, Card, CardActionArea, CardActions, CardMedia, Typography} from "@mui/material";
+import React from "react";
 
-interface ISweetCard {
+interface ISweetCard extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     title: string,
     subtitle: string,
     imgSrc: string
@@ -23,18 +24,17 @@ const cardFooterStyle = {
     bgcolor: "#000000b3"
 };
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const cardContentStyle = {
     position: "relative",
-    borderRadius: 15,
     zIndex: 1,
     width: cardWidth,
     transition: "transform .3s ease-in-out",
     "&:hover": {
         transform: "scale(1.05)"
     },
-}))
+}
 
-export default function SweetCard({title, subtitle, imgSrc} : ISweetCard) {
+export default function SweetCard({title, subtitle, imgSrc, ...props} : ISweetCard) {
 
     const cardEffect = (
         <Box
@@ -48,8 +48,8 @@ export default function SweetCard({title, subtitle, imgSrc} : ISweetCard) {
     );
 
     return(
-        <>
-            <StyledCard>
+        <div {...props}>
+            <Card sx={cardContentStyle}>
                 <CardActionArea sx={{height: cardHeight}}>
                     <CardMedia
                         component="img"
@@ -66,8 +66,8 @@ export default function SweetCard({title, subtitle, imgSrc} : ISweetCard) {
                         </Box>
                     </CardActions>
                 </CardActionArea>
-            </StyledCard>
+            </Card>
             {cardEffect}
-        </>
+        </div>
     )
 }
