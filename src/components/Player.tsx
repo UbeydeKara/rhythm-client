@@ -6,7 +6,7 @@ import usePlayer from "@/src/hooks/usePlayer";
 const stackStyle = {
     color: "white",
     background: "linear-gradient(90deg, rgba(61,58,111,1) 0%, rgba(44,43,66,1) 50%, rgba(61,58,111,1) 100%);",
-    position: "absolute",
+    position: "fixed",
     bottom: 0,
     left: 0,
     right: 0,

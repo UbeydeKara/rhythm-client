@@ -103,7 +103,15 @@ export default function Sidebar() {
             </List>
 
             <Grow in={player.song.id !== undefined}>
-                <Box display="flex" justifyContent="center" width="100%" mt="auto" mb={8} borderRadius={2} overflow="hidden">
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    width="100%"
+                    mt="auto"
+                    mb={8}
+                    borderRadius={2}
+                    overflow="hidden"
+                    sx={{pointerEvents: "none"}}>
                     <div id="player"/>
                 </Box>
             </Grow>

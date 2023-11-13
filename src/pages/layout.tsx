@@ -13,13 +13,14 @@ const containerCenter = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    py: 6
+    pt: 6,
+    pb: 18
 }
 
 export default function Layout({ children } : ILayout) {
     const router = useRouter();
     return (
-            <Box sx={{display: "flex"}}>
+            <Box display="flex" overflow="hidden">
                 <Sidebar/>
                 <Container component="main" sx={containerCenter}>
                     <Fade in key={router.pathname} timeout={500}>
