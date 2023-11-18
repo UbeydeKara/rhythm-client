@@ -94,12 +94,12 @@ export default function Sidebar() {
             variant="permanent"
             anchor="left">
             <List sx={{color: "text.secondary"}}>
-                <Typography variant="subtitle2" sx={{ml: 2, my: 2}}>LIBRARY</Typography>
-                {libraryButtons.map((item) => SweetItem(item))}
-            </List>
-            <List sx={{color: "text.secondary"}}>
                 <Typography variant="subtitle2" sx={{ml: 2, my: 2}}>DISCOVER</Typography>
                 {discoverButtons.map((item) => SweetItem(item))}
+            </List>
+            <List sx={{color: "text.secondary"}}>
+                <Typography variant="subtitle2" sx={{ml: 2, my: 2}}>LIBRARY</Typography>
+                {libraryButtons.map((item) => SweetItem(item))}
             </List>
 
             <Grow in={player.song.id !== undefined}>

@@ -1,0 +1,1 @@
+export const GET_POPULAR_ALBUMS = "GET_POPULAR_ALBUMS";

@@ -47,8 +47,8 @@ export default function SweetCard({item} : ISweetCard) {
             component="img"
             height={cardHeight}
             width={cardWidth}
-            src={item.img}
-            alt={item.title}
+            src={item.image}
+            alt={item.name}
         />
     );
 
@@ -60,14 +60,14 @@ export default function SweetCard({item} : ISweetCard) {
                         component="img"
                         height="100%"
                         width={cardWidth}
-                        image={item.img}
+                        image={item.image}
                         sx={{objectFit: "fill"}}
-                        alt={item.title}>
+                        alt={item.name}>
                     </CardMedia>
                     <CardActions sx={cardFooterStyle}>
                         <Box textAlign="center" width="100%" color="white">
-                            <Typography fontWeight="bold">{item.title}</Typography>
-                            <Typography variant="body2" fontWeight={100}>{item.artist}</Typography>
+                            <Typography fontWeight="bold">{item.name}</Typography>
+                            <Typography variant="body2" fontWeight={100}>{item.artists}</Typography>
                         </Box>
                     </CardActions>
                 </CardActionArea>

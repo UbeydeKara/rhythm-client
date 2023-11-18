@@ -6,7 +6,9 @@ interface IYTPlayer {
     pauseVideo: () => void,
     mute: () => void,
     unMute: () => void,
-    seekTo: (seconds: Number, allowSeekAhead?: Boolean) => void
+    seekTo: (seconds: Number, allowSeekAhead?: Boolean) => void,
+    getDuration: () => number,
+    getCurrentTime: () => number
 }
 
 export default function useYoutube() {
@@ -23,6 +25,9 @@ export default function useYoutube() {
         tag.onload = onYouTubeIframeAPIReady;
     }
 
+    /**
+     * playerVars:
+     */
     const onYouTubeIframeAPIReady = () => {
         (window as any).YT.ready(function() {
             const playerObj = new (window as any).YT.Player('player', {
@@ -30,7 +35,7 @@ export default function useYoutube() {
                 width: '200',
                 playerVars: {
                     controls: 0,
-                    origin: 'http://localhost:3000/'
+                    rel: 0
                 }
             });
             setPlayer(playerObj);

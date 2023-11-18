@@ -1,8 +1,7 @@
 export interface SongType {
-    id: number,
-    artist: string,
-    title: string,
-    img: string,
-    source: string,
-    duration: number
+    id: string,
+    name: string,
+    image: string,
+    artists: string,
+    ytVideoId: string
 }

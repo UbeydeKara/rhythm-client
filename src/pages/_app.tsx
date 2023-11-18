@@ -4,14 +4,17 @@ import Head from 'next/head';
 // theme
 import ThemeProvider from '../theme';
 import {PlayerProvider} from "@/src/contexts/PlayerContext";
+import store from "@/src/redux/store";
+import {Provider} from "react-redux";
+import React from "react";
 
 // ----------------------------------------------------------------------
 
-MyApp.propTypes = {
+App.propTypes = {
     Component: PropTypes.func, pageProps: PropTypes.object, settings: PropTypes.object,
 };
 
-export default function MyApp(props: any) {
+export default function App(props: any) {
     const {Component, pageProps} = props;
 
     const getLayout = Component.getLayout ?? ((page: any) => page);
@@ -23,7 +26,9 @@ export default function MyApp(props: any) {
 
         <PlayerProvider>
             <ThemeProvider>
-                {getLayout(<Component {...pageProps} />)}
+                <Provider store={store}>
+                    {getLayout(<Component {...pageProps} />)}
+                </Provider>
             </ThemeProvider>
         </PlayerProvider>
 
