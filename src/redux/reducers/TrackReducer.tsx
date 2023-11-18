@@ -2,7 +2,7 @@ import {GET_POPULAR_ALBUMS} from "../types";
 import {SongType} from "@/src/types/SongType";
 import {AnyAction, PayloadAction} from "@reduxjs/toolkit";
 
-const initialState: SongType[] = [];
+const initialState: SongType[] = Array(20).fill(undefined);
 
 function TrackReducer(state = initialState, action: PayloadAction<SongType[]> | AnyAction) {
     const { type, payload } = action;

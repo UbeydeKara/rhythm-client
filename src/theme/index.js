@@ -18,7 +18,7 @@ ThemeProvider.propTypes = {
 
 export default function ThemeProvider({children}) {
     // TODO: theme will be editable later
-    const isLight = true;
+    const isLight = false;
 
     const themeOptions = useMemo(() => ({
         palette: isLight ? palette.light : palette.dark,

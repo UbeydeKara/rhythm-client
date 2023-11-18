@@ -6,7 +6,7 @@ import {useRef} from "react";
 
 const stackStyle = {
     color: "white",
-    background: "linear-gradient(90deg, rgba(61, 58, 111, .9) 0%, rgba(44, 43, 66, .9) 50%, rgba(61, 58, 111, .9) 100%);",
+    bgcolor: "background.player",
     position: "fixed",
     bottom: 0,
     left: 0,

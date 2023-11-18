@@ -8,7 +8,7 @@ const nextConfig = {
         return [
             {
                 source: '/',
-                destination: '/albums',
+                destination: '/store',
                 permanent: true,
             },
         ]

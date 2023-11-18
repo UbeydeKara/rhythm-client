@@ -41,17 +41,18 @@ const icons = [
     FavoriteTwoTone, WebAssetTwoTone
 ]
 
-const libraryButtons = [
-    { id: 0, text: 'Playlists', icon: icons[0], to: "/playlists" },
-    { id: 1, text: 'Artists', icon: icons[1], to: "/artists" },
-    { id: 2, text: 'Albums', icon: icons[2], to: "/albums" },
-    { id: 3, text: 'Songs', icon: icons[3], to: "/songs" }
-]
 const discoverButtons = [
-    { id: 4, text: 'Store', icon: icons[4], to: "/store" },
-    { id: 5, text: 'Radio', icon: icons[5], to: "/radio" },
-    { id: 6, text: 'For You', icon: icons[6], to: "/for-you" },
-    { id: 7, text: 'Browse', icon: icons[7], to: "/browse" }
+    { id: 0, text: 'Store', icon: icons[4], to: "/store" },
+    { id: 1, text: 'Genres', icon: icons[5], to: "/genres" },
+    { id: 2, text: 'For You', icon: icons[6], to: "/for-you" },
+    { id: 3, text: 'Browse', icon: icons[7], to: "/browse" }
+]
+
+const libraryButtons = [
+    { id: 4, text: 'Playlists', icon: icons[0], to: "/playlists" },
+    { id: 5, text: 'Artists', icon: icons[1], to: "/artists" },
+    { id: 6, text: 'Albums', icon: icons[2], to: "/albums" },
+    { id: 7, text: 'Store', icon: icons[3], to: "/songs" }
 ]
 
 interface IButtons {
@@ -70,7 +71,7 @@ export default function Sidebar() {
         const color = router.pathname === item.to ? "primary.main" : "inherit";
         return(
             <ListItem key={item.id} disablePadding>
-                <ListItemButton component={Link} href={item.to} sx={{my: .2, borderRadius: 1, color: color}}>
+                <ListItemButton component={Link} href={item.to} sx={{my: .2, borderRadius: 1, color: color}} disabled={item.id > 0}>
                     <ListItemIcon>
                         <IconComponent fontSize="small"/>
                     </ListItemIcon>
@@ -86,7 +87,7 @@ export default function Sidebar() {
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     p: 3,
-                    bgcolor: "divider",
+                    bgcolor: "background.sidebar",
                     width: drawerWidth,
                     boxSizing: 'border-box',
                 },

@@ -1,4 +1,4 @@
-import {Box, Card, CardActionArea, CardActions, CardMedia, Typography} from "@mui/material";
+import {Box, Card, CardActionArea, CardActions, CardMedia, Skeleton, Typography} from "@mui/material";
 import React from "react";
 import {SongType} from "@/src/types/SongType";
 import usePlayer from "@/src/hooks/usePlayer";
@@ -9,12 +9,6 @@ interface ISweetCard extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDi
 
 const cardHeight = 240;
 const cardWidth = 200;
-
-const cardShadowHoverStyle = {
-    position: "absolute",
-    bottom: 30,
-    filter: "blur(30px)"
-}
 
 const cardFooterStyle = {
     position: "absolute",
@@ -41,38 +35,29 @@ export default function SweetCard({item} : ISweetCard) {
         player.playSong(item);
     };
 
-    const cardEffect = (
-        <Box
-            sx={cardShadowHoverStyle}
-            component="img"
-            height={cardHeight}
-            width={cardWidth}
-            src={item.image}
-            alt={item.name}
-        />
-    );
-
     return(
         <div>
-            <Card sx={cardContentStyle} onClick={playCard}>
-                <CardActionArea sx={{height: cardHeight}}>
-                    <CardMedia
-                        component="img"
-                        height="100%"
-                        width={cardWidth}
-                        image={item.image}
-                        sx={{objectFit: "fill"}}
-                        alt={item.name}>
-                    </CardMedia>
-                    <CardActions sx={cardFooterStyle}>
-                        <Box textAlign="center" width="100%" color="white">
-                            <Typography fontWeight="bold">{item.name}</Typography>
-                            <Typography variant="body2" fontWeight={100}>{item.artists}</Typography>
-                        </Box>
-                    </CardActions>
-                </CardActionArea>
-            </Card>
-            {cardEffect}
+            {item ?
+                <Card sx={cardContentStyle} onClick={playCard}>
+                    <CardActionArea sx={{height: cardHeight}}>
+                        <CardMedia
+                            component="img"
+                            height="100%"
+                            width={cardWidth}
+                            image={item.image}
+                            sx={{objectFit: "fill"}}
+                            alt={item.name}>
+                        </CardMedia>
+                        <CardActions sx={cardFooterStyle}>
+                            <Box textAlign="center" width="100%" color="white">
+                                <Typography fontWeight="bold">{item.name}</Typography>
+                                <Typography variant="body2" fontWeight={100}>{item.artists}</Typography>
+                            </Box>
+                        </CardActions>
+                    </CardActionArea>
+                </Card>
+                :
+                <Skeleton variant="rounded" height={cardHeight} width={cardWidth}/>}
         </div>
     )
 }

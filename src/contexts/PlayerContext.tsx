@@ -79,13 +79,15 @@ function PlayerProvider({children}: IPlayerProvider) {
         }
 
         const currentTime = ytPlayer.getCurrentTime();
+        const currentDuration = ytPlayer.getDuration();
 
-        if (duration > 0 && currentTime >= duration) {
+        if (currentTime > 0 && currentTime === currentDuration)
             setStatus("ended");
-        }
 
-        setDuration(ytPlayer.getDuration());
-        setOffset(currentTime);
+        else {
+            setDuration(currentDuration);
+            setOffset(currentTime);
+        }
     }
 
     useEffect(() => {
