@@ -1,6 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import useYoutube from "@/src/hooks/useYoutube";
 import {SongType} from "@/src/types/SongType";
+import TrackService from "@/src/services/track-service";
 
 // ----------------------------------------------------------------------
 
@@ -34,15 +35,17 @@ function PlayerProvider({children}: IPlayerProvider) {
 
     const [ytPlayer] = useYoutube();
 
-    const playSong = (item: SongType) => {
-        document.title = `${item.name} - ${item.artists} | Rhythm`;
+    const playSong = async(item: SongType) => {
+        const title = `${item.name} - ${item.artists}`;
+        document.title = `${title} | Rhythm`;
 
         setSong(item);
         setOffset(0);
         setStatus("playing");
 
         if (ytPlayer) {
-            ytPlayer.loadVideoById(item.ytVideoId);
+            const ytVideoId = await TrackService.findVideoId(item.id, title);
+            ytPlayer.loadVideoById(ytVideoId.data);
             ytPlayer.playVideo();
         }
     }
