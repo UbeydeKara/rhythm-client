@@ -12,8 +12,9 @@ import {Box, Unstable_Grid2 as Grid} from "@mui/material";
 // redux
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {getPopularAlbums} from "../redux/actions/TrackAction";
-import {SongType} from "../types/SongType";
 import TopBar from "@/src/components/TopBar";
+import {SongType} from "../types/SongType";
+import NewReleases from "../sections/new-releases";
 
 // ----------------------------------------------------------------------
 Store.getLayout = function getLayout(page: React.ReactNode) {
@@ -21,27 +22,28 @@ Store.getLayout = function getLayout(page: React.ReactNode) {
 };
 
 export default function Store() {
-    const tracks: SongType[] = useAppSelector(x => x.tracks);
+    const {top50} = useAppSelector(x => x.tracks);
     const dispatch = useAppDispatch();
 
-    const retrieveData = async() => {
+    const retrieveData = async () => {
         await Promise.all([
             dispatch(getPopularAlbums())
         ]);
     }
 
     useEffect(() => {
-        if (tracks[0] === undefined)
+        if (top50[0] === undefined)
             retrieveData();
     }, []);
 
-    return(
+    return (
         <Page title="Store">
-            <Box component="section" maxWidth={1000}>
-                <TopBar title="Popular" subtitle="Store"/>
-                <Grid container mt={1} spacing={8} justifyContent={{xs: "center", lg: "start"}}>
-                    {tracks.map((item, index) =>
-                        <Grid key={index} sx={{position: "relative"}}>
+            <Box component="section">
+                <NewReleases/>
+                <TopBar title="Popular" playlist={top50}/>
+                <Grid container spacing={{xs: 2, md: 4, lg: 8}} columns={{xs: 2, md: 3, lg: 4}}>
+                    {top50.map((item: SongType, index: React.Key) =>
+                        <Grid key={index} sx={{position: "relative"}} xs={1}>
                             <SweetCard item={item}/>
                         </Grid>
                     )}

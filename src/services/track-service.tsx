@@ -6,6 +6,10 @@ const getPopularAlbums = () => {
     return http.get(serviceUrl + "/top50");
 };
 
+const getNewReleases = () => {
+    return http.get(serviceUrl + "/newReleases");
+};
+
 const findVideoId = (trackId: string, searchQuery: string) => {
     return http.post(serviceUrl + "/find/videoId", {
         trackId,
@@ -15,6 +19,7 @@ const findVideoId = (trackId: string, searchQuery: string) => {
 
 const TrackService = {
     getPopularAlbums,
+    getNewReleases,
     findVideoId
 };
 

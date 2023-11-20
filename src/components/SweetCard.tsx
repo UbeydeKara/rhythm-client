@@ -8,7 +8,6 @@ interface ISweetCard extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDi
 }
 
 const cardHeight = 240;
-const cardWidth = 200;
 
 const cardFooterStyle = {
     position: "absolute",
@@ -21,7 +20,7 @@ const cardFooterStyle = {
 const cardContentStyle = {
     position: "relative",
     zIndex: 1,
-    width: cardWidth,
+    aspectRatio: "1/1.2",
     transition: "transform .3s ease-in-out",
     "&:hover": {
         transform: "scale(1.05)"
@@ -36,14 +35,13 @@ export default function SweetCard({item} : ISweetCard) {
     };
 
     return(
-        <div>
+        <>
             {item ?
                 <Card sx={cardContentStyle} onClick={playCard}>
-                    <CardActionArea sx={{height: cardHeight}}>
+                    <CardActionArea sx={{height: "100%"}}>
                         <CardMedia
                             component="img"
                             height="100%"
-                            width={cardWidth}
                             image={item.image}
                             sx={{objectFit: "fill"}}
                             alt={item.name}>
@@ -57,7 +55,7 @@ export default function SweetCard({item} : ISweetCard) {
                     </CardActionArea>
                 </Card>
                 :
-                <Skeleton variant="rounded" height={cardHeight} width={cardWidth}/>}
-        </div>
+                <Skeleton variant="rounded" sx={{aspectRatio: "1/1.2", height: "unset"}}/>}
+        </>
     )
 }

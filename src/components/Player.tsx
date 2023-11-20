@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import {Pause, VolumeUp, SkipPrevious, SkipNext, PlayArrow, VolumeOff} from "@mui/icons-material";
 import usePlayer from "@/src/hooks/usePlayer";
 import {useRef} from "react";
+import useResponsive from "@/src/hooks/useResponsive";
 
 const stackStyle = {
     color: "white",
@@ -12,7 +13,7 @@ const stackStyle = {
     left: 0,
     right: 0,
     zIndex: 1300,
-    px: 3,
+    px: {xs: 1, sm: 3},
     py: 1.5,
     height: 65,
     backdropFilter: "blur(10px)"
@@ -20,8 +21,10 @@ const stackStyle = {
 
 const sliderStyle = {
     color: "inherit",
-    ml: 4,
-    mr: 2,
+    ml: {xs: 1, sm: 4},
+    mr: {sm: 2},
+    my: {xs: -1.5, sm: 0},
+    width: {xs: "90%", sm: "100%"},
     '& .MuiSlider-thumb': {
         width: 15,
         height: 15
@@ -43,17 +46,38 @@ const marquee = (text: string, ratio: number) => {
 export default function Player() {
     const player = usePlayer();
     const boxRef = useRef();
+    const media = useResponsive("up", "sm");
+    const buttonSize = media ? "medium" : "small";
 
     const handleOffsetChange = (event: Event, newValue: number | number[]) => {
         player.updateOffset(newValue as number);
     };
+
+    const switchButtons = (
+        <Box display="flex">
+            <IconButton color="inherit" size={buttonSize}>
+                <SkipPrevious/>
+            </IconButton>
+            {player.status === "playing" ?
+                <IconButton color="inherit" onClick={player.pauseSong} size={buttonSize}>
+                    <Pause/>
+                </IconButton>
+                :
+                <IconButton color="inherit" onClick={player.resumeSong} size={buttonSize}>
+                    <PlayArrow/>
+                </IconButton>}
+            <IconButton color="inherit" size={buttonSize}>
+                <SkipNext/>
+            </IconButton>
+        </Box>
+    );
 
     return (
         player.song.id && <Slide direction="up" in={true} mountOnEnter unmountOnExit>
             <Stack direction="row" sx={stackStyle} alignItems="center">
                 <Avatar src={player.song.image}/>
 
-                <Box ref={boxRef} ml={2} width={250} whiteSpace="nowrap" overflow="hidden">
+                <Box ref={boxRef} ml={{xs: 1, sm: 2}} width={250} whiteSpace="nowrap" overflow="hidden">
                     <Typography variant="subtitle2" sx={{animation: `${marquee(player.song.name, 3.2)} 12s linear infinite alternate`}}>
                         {player.song.name}
                     </Typography>
@@ -62,24 +86,12 @@ export default function Player() {
                     </Typography>
                 </Box>
 
-                <IconButton color="inherit">
-                    <SkipPrevious/>
-                </IconButton>
-                {player.status === "playing" ?
-                    <IconButton color="inherit" onClick={player.pauseSong}>
-                        <Pause/>
-                    </IconButton>
-                    :
-                    <IconButton color="inherit" onClick={player.resumeSong}>
-                        <PlayArrow/>
-                    </IconButton>}
-                <IconButton color="inherit">
-                    <SkipNext/>
-                </IconButton>
+                <Stack direction={{xs: "column", sm: "row"}} width="100%" justifyContent="center" alignItems="center">
+                    {switchButtons}
+                    <Slider sx={sliderStyle} max={player.duration} value={player.offset} step={1} onChange={handleOffsetChange} size={buttonSize}></Slider>
+                </Stack>
 
-                <Slider sx={sliderStyle} max={player.duration} value={player.offset} step={1} onChange={handleOffsetChange}></Slider>
-
-                <IconButton color="inherit" sx={{mx: 2}} onClick={player.toggleMute}>
+                <IconButton color="inherit" sx={{mx: {sm: 2}}} onClick={player.toggleMute} size={buttonSize}>
                     {player.isMuted ? <VolumeOff/> : <VolumeUp/>}
                 </IconButton>
             </Stack>
