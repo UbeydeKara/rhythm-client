@@ -72,6 +72,11 @@ const GREY = {
   500_90: alpha('#212B36', 0.9),
 };
 
+const PLAYER = {
+  light: alpha('#2b2956', 0.9),
+  dark: alpha('#212B36', 0.9)
+};
+
 const GRADIENTS = {
   primary: createGradient(PRIMARY.light, PRIMARY.main),
   info: createGradient(INFO.light, INFO.main),
@@ -116,14 +121,14 @@ const palette = {
     ...COMMON,
     mode: 'light',
     text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-    background: { paper: '#fff', default: '#fff', neutral: GREY[200], sidebar: GREY[500_24], player: GREY[700]},
+    background: { paper: '#fff', default: '#fff', neutral: GREY[200], sidebar: GREY[500_24], player: PLAYER.light},
     action: { active: GREY[600], ...COMMON.action },
   },
   dark: {
     ...COMMON,
     mode: 'dark',
     text: { primary: '#fff', secondary: GREY[500], disabled: GREY[600] },
-    background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16], sidebar: GREY[900], player: GREY[500_90] },
+    background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16], sidebar: GREY[900], player: PLAYER.dark },
     action: { active: GREY[500], ...COMMON.action },
   },
 };
