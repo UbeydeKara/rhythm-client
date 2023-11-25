@@ -2,5 +2,10 @@ export interface SongType {
     id: string,
     name: string,
     image: string,
-    artists: string
+    artists: ArtistType[]
+}
+
+export interface ArtistType {
+    id: string,
+    name: string
 }

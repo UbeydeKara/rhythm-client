@@ -4,6 +4,7 @@ import {SongType} from "@/src/types/SongType";
 import usePlayer from "@/src/hooks/usePlayer";
 import {getAverageRGB} from "@/src/utils/getImageColor";
 import {marquee} from "@/src/utils/marquee";
+import {artistNames} from "@/src/utils/artistNames";
 
 interface ISweetCard extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     item: SongType
@@ -55,8 +56,8 @@ export default function SweetCard({item} : ISweetCard) {
                                     </Typography>
                                     <Typography variant="body2"
                                                 fontWeight={100}
-                                                sx={{animation: hoveredCardId === item.id ? marquee(item.artists, 2) : ""}}>
-                                        {item.artists}
+                                                sx={{animation: hoveredCardId === item.id ? marquee(artistNames(item.artists), 2) : ""}}>
+                                        {artistNames(item.artists)}
                                     </Typography>
                                 </Box>
                             </CardContent>

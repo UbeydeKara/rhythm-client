@@ -5,6 +5,7 @@ import usePlayer from "@/src/hooks/usePlayer";
 import {useRef} from "react";
 import useResponsive from "@/src/hooks/useResponsive";
 import {marquee} from "@/src/utils/marquee";
+import {artistNames} from "@/src/utils/artistNames";
 
 const stackStyle = {
     color: "white",
@@ -91,8 +92,8 @@ export default function Player() {
                         <Typography variant="subtitle2" sx={{animation: marquee(player.song.name, 3.2)}}>
                             {player.song.name}
                         </Typography>
-                        <Typography variant="body2" sx={{animation: marquee(player.song.artists, 2)}}>
-                            {player.song.artists}
+                        <Typography variant="body2" sx={{animation: marquee(artistNames(player.song.artists), 2)}}>
+                            {artistNames(player.song.artists)}
                         </Typography>
                     </Box>
 

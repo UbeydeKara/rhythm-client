@@ -5,6 +5,7 @@ import {alpha} from "@mui/material/styles";
 import {useHorizontalScroll} from "@/src/hooks/useHorizontalScroll";
 import usePlayer from "@/src/hooks/usePlayer";
 import useResponsive from "@/src/hooks/useResponsive";
+import {artistNames} from "@/src/utils/artistNames";
 
 const actionAreaStyle = (img: string) => {
     return {
@@ -37,7 +38,9 @@ export default function Carousel({tracks}: ICarousel) {
                             <Stack height="100%" justifyContent="end">
                                 <Box bgcolor={alpha("#000", .5)} px={3} py={1}>
                                     <Typography fontWeight="bold">{item.name}</Typography>
-                                    <Typography variant="body2" fontWeight={100}>{item.artists}</Typography>
+                                    <Typography variant="body2" fontWeight={100}>
+                                        {artistNames(item.artists)}
+                                    </Typography>
                                 </Box>
                             </Stack>
                         </CardActionArea>

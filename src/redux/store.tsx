@@ -1,9 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import TrackReducer from "./reducers/TrackReducer";
+import ChartReducer from "./reducers/ChartReducer";
 
 const store = configureStore({
     reducer: {
-        tracks: TrackReducer,
+        charts: ChartReducer,
     }
 })
 

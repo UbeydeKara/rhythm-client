@@ -20,7 +20,6 @@ export function useHorizontalScroll() {
                     inline: "center"
                 });
                 setElementId(childId);
-                console.log(childId)
             };
             el.addEventListener("wheel", onWheel);
             return () => el.removeEventListener("wheel", onWheel);
