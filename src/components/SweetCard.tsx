@@ -22,12 +22,13 @@ export default function SweetCard({item} : ISweetCard) {
     const {playSong} = usePlayer();
     const imgRef = useRef<any>();
     const [hoveredCardId, setCardId] = useState("none");
+    const [loaded, setLoaded] = useState(false);
 
     const cardColor = useMemo(() => {
-        if (imgRef && imgRef.current)
+        if (loaded)
             return getAverageRGB(imgRef.current);
         return "initial;";
-    }, [imgRef.current]);
+    }, [loaded]);
 
     const playCard = () => {
         playSong(item);
@@ -46,6 +47,7 @@ export default function SweetCard({item} : ISweetCard) {
                                 image={item.image}
                                 crossOrigin="anonymous"
                                 sx={{objectFit: "fill"}}
+                                onLoad={() => setLoaded(true)}
                                 alt={item.name}>
                             </CardMedia>
                             <CardContent sx={{py: 1, px: 2, textWrap: "nowrap", position: "relative"}}>
