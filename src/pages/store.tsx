@@ -15,6 +15,8 @@ import TopBar from "@/src/components/TopBar";
 import {SongType} from "../types/SongType";
 import NewReleases from "../sections/new-releases";
 import {getWeeklyTracks} from "@/src/redux/actions/ChartAction";
+import Albums from "@/src/sections/albums";
+import Genres from "@/src/sections/genres";
 
 // ----------------------------------------------------------------------
 Store.getLayout = function getLayout(page: React.ReactNode) {
@@ -40,6 +42,8 @@ export default function Store() {
         <Page title="Store">
             <Box component="section">
                 <NewReleases/>
+                <Albums/>
+                <Genres/>
                 <TopBar title="Popular" playlist={weeklyTracks}/>
                 <Grid container spacing={{xs: 2, md: 4, lg: 8}} columns={{xs: 2, md: 3, lg: 4}}>
                     {weeklyTracks.map((item: SongType, index: React.Key) =>

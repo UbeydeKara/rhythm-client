@@ -16,7 +16,7 @@ export function useHorizontalScroll() {
 
                 el.children[childId].scrollIntoView({
                     behavior: 'smooth',
-                    block: "center",
+                    block: 'nearest',
                     inline: "center"
                 });
                 setElementId(childId);
