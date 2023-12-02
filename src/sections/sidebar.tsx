@@ -3,12 +3,13 @@ import {useCallback} from "react";
 // icons
 import {
     FavoriteTwoTone,
-    LibraryMusic,
-    MusicNote,
-    Person2,
+    LibraryMusicTwoTone,
+    MusicNoteTwoTone,
+    Person2TwoTone,
+    PodcastsTwoTone,
     RadioButtonCheckedTwoTone,
     StorefrontTwoTone,
-    Subscriptions, WebAssetTwoTone
+    SubscriptionsTwoTone
 } from "@mui/icons-material";
 
 // mui
@@ -36,23 +37,18 @@ import usePlayer from "@/src/hooks/usePlayer";
 
 const drawerWidth = 240;
 
-const icons = [
-    Subscriptions, Person2, LibraryMusic, MusicNote, StorefrontTwoTone, RadioButtonCheckedTwoTone,
-    FavoriteTwoTone, WebAssetTwoTone
-]
-
 const discoverButtons = [
-    { id: 0, text: 'Store', icon: icons[4], to: "/store" },
-    { id: 1, text: 'Genres', icon: icons[5], to: "/genres" },
-    { id: 2, text: 'For You', icon: icons[6], to: "/for-you" },
-    { id: 3, text: 'Browse', icon: icons[7], to: "/browse" }
+    { id: 0, text: 'For You', icon: FavoriteTwoTone, to: "/for-you" },
+    { id: 1, text: 'Browse', icon: RadioButtonCheckedTwoTone, to: "/browse" },
+    { id: 2, text: 'Podcasts', icon: PodcastsTwoTone, to: "/podcasts" },
+    { id: 3, text: 'Store', icon: StorefrontTwoTone, to: "/store" }
 ]
 
 const libraryButtons = [
-    { id: 4, text: 'Playlists', icon: icons[0], to: "/playlists" },
-    { id: 5, text: 'Artists', icon: icons[1], to: "/artists" },
-    { id: 6, text: 'Albums', icon: icons[2], to: "/albums" },
-    { id: 7, text: 'Store', icon: icons[3], to: "/songs" }
+    { id: 4, text: 'Playlists', icon: SubscriptionsTwoTone, to: "/playlists" },
+    { id: 5, text: 'Artists', icon: Person2TwoTone, to: "/artists" },
+    { id: 6, text: 'Albums', icon: LibraryMusicTwoTone, to: "/albums" },
+    { id: 7, text: 'Songs', icon: MusicNoteTwoTone, to: "/songs" }
 ]
 
 interface IButtons {
@@ -71,7 +67,7 @@ export default function Sidebar() {
         const color = router.pathname === item.to ? "primary.main" : "inherit";
         return(
             <ListItem key={item.id} disablePadding>
-                <ListItemButton component={Link} href={item.to} sx={{my: .2, borderRadius: 1, color: color}} disabled={item.id > 0}>
+                <ListItemButton component={Link} href={item.to} sx={{my: .2, borderRadius: 1, color: color}} disabled={item.id !== 3}>
                     <ListItemIcon>
                         <IconComponent fontSize="small"/>
                     </ListItemIcon>
