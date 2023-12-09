@@ -1,4 +1,4 @@
-import {Unstable_Grid2 as Grid, Typography, CardActionArea, Link, Box, CardContent, Skeleton} from "@mui/material";
+import {Unstable_Grid2 as Grid, Typography, CardActionArea, Link, Box, Skeleton} from "@mui/material";
 import {randomBg} from "@/src/utils/bgGenerator";
 import TopBar from "@/src/components/TopBar";
 import {useEffect, useState} from "react";
@@ -19,12 +19,10 @@ export default function Genres() {
             <Grid container spacing={4}>
                 {genres_mock.slice(randomGenres, randomGenres + 8).map((item, index) => (
                     hasMounted ?
-                    <Grid key={index} sx={{width: "25%", aspectRatio: "1/.5"}}>
+                    <Grid key={index} sx={{width: {xs: "50%", md: "25%"}, aspectRatio: "1/.5"}}>
                         <Link href={`/genre/${item}`} color="white" underline="none">
                             <CardActionArea sx={{background: randomBg(), height: "100%", borderRadius: 2}}>
-                                <CardContent>
-                                    <Typography variant="body1" textAlign="center" fontWeight="bold">{item}</Typography>
-                                </CardContent>
+                                <Typography variant="body1" textAlign="center" fontWeight="bold">{item}</Typography>
                             </CardActionArea>
                         </Link>
                     </Grid> : <Skeleton key={index} sx={{height: "unset", width: "25%", aspectRatio: "1/.5"}}/>
