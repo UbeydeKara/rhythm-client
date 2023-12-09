@@ -16,7 +16,7 @@ export default function AlbumCard({album}: IAlbumCard) {
     const artistUrl = `/artist/${beautifyURL(album.artists[0].name)}/${album.artists[0].id}`;
 
     return(
-        <Card sx={{minWidth: {xs: "45%", md: "35%", lg: "22%"}, bgcolor: "initial", boxShadow: 0}}>
+        <Card sx={{minWidth: {xs: "65%", sm: "50%", md: "35%", lg: "22%"}, bgcolor: "initial", boxShadow: 0}}>
             <Link href={albumUrl} color="inherit">
                 <CardActionArea sx={{p: 1.5, borderRadius: 2}}>
                     <CardMedia component="img" src={album.image} alt={album.name} sx={{mb: 2, borderRadius: 2}}/>
