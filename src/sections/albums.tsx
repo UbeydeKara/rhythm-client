@@ -32,9 +32,9 @@ export default function Albums() {
 
     return(
         <Box component="section">
-            <TopBar title="Albums" playlist={weeklyAlbums}/>
-            <Stack ref={scrollRef} direction="row" spacing={2} sx={{overflowX: "hidden"}}>
-                {weeklyAlbums.map((item: SongType, index: React.Key) => (
+            <TopBar title="Albums"/>
+            <Stack ref={scrollRef} direction="row" spacing={2} sx={{overflowX: {xs: "auto", md: "hidden"}}}>
+                {weeklyAlbums.slice(0, 20).map((item: SongType, index: React.Key) => (
                     item ? <AlbumCard key={index} album={item}/> :
                         <Skeleton key={index} variant="rounded" sx={skeletonStyle}/>
                 ))}

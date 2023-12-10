@@ -3,16 +3,17 @@ import useYoutube from "@/src/hooks/useYoutube";
 import {SongType} from "@/src/types/SongType";
 import {artistNames} from "@/src/utils/artistNames";
 import YoutubeService from "@/src/services/youtube-service";
+import {AlbumTrack} from "@/src/types/AlbumType";
 
 // ----------------------------------------------------------------------
 
 const initialState = {
-    song: {} as SongType,
+    song: {} as SongType | AlbumTrack,
     status: "unstarted" as "unstarted" | "playing" | "paused" | "ended",
     isMuted: false,
     offset: 0,
     duration: 0,
-    playSong: (item: SongType) => {},
+    playSong: (item: SongType | AlbumTrack) => {},
     resumeSong: () => {},
     pauseSong: () => {},
     toggleMute: () => {},
@@ -28,7 +29,7 @@ interface IPlayerProvider {
 }
 
 function PlayerProvider({children}: IPlayerProvider) {
-    const [song, setSong] = useState<SongType>(initialState.song);
+    const [song, setSong] = useState<SongType | AlbumTrack>(initialState.song);
     const [status, setStatus] = useState(initialState.status);
     const [isMuted, setMuted] = useState(initialState.isMuted);
     const [offset, setOffset] = useState(initialState.offset);
@@ -36,7 +37,7 @@ function PlayerProvider({children}: IPlayerProvider) {
 
     const [ytPlayer] = useYoutube();
 
-    const playSong = async(item: SongType) => {
+    const playSong = async(item: SongType | AlbumTrack) => {
         const title = `${item.name} - ${artistNames(item.artists)}`;
         document.title = `${title} | Rhythm`;
 

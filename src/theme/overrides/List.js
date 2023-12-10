@@ -2,6 +2,13 @@
 
 export default function List(theme) {
   return {
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: theme.shape.borderRadius,
+        },
+      },
+    },
     MuiListItemIcon: {
       styleOverrides: {
         root: {
