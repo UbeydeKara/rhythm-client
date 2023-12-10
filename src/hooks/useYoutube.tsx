@@ -33,6 +33,7 @@ export default function useYoutube() {
             const playerObj = new (window as any).YT.Player('player', {
                 height: '200',
                 width: '200',
+                origin: window.location.href,
                 playerVars: {
                     controls: 0,
                     rel: 0

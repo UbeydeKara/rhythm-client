@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
-import ChartReducer from "./reducers/ChartReducer";
+import ChartReducer from "@/src/redux/reducers/ChartReducer";
+import AlbumReducer from "@/src/redux/reducers/AlbumReducer";
 
 const store = configureStore({
     reducer: {
         charts: ChartReducer,
+        album: AlbumReducer
     }
 })
 

@@ -19,13 +19,13 @@ export default function Genres() {
             <Grid container spacing={4}>
                 {genres_mock.slice(randomGenres, randomGenres + 8).map((item, index) => (
                     hasMounted ?
-                        <Grid key={index} sx={{width: {xs: "50%", md: "25%"}, aspectRatio: "1/.5"}}>
-                            <Link href={`/genre/${item}`} color="white" underline="none">
-                                <CardActionArea sx={{background: randomBg(), height: "100%", borderRadius: 2}}>
-                                    <Typography variant="body1" textAlign="center" fontWeight="bold">{item}</Typography>
-                                </CardActionArea>
-                            </Link>
-                        </Grid> : <Skeleton key={index} sx={{height: "unset", width: "25%", aspectRatio: "1/.5"}}/>
+                    <Grid key={index} sx={{width: {xs: "50%", md: "25%"}, aspectRatio: "1/.5"}}>
+                        <Link href={`/genre/${item}`} color="white" underline="none">
+                            <CardActionArea sx={{background: randomBg(), height: "100%", borderRadius: 2}}>
+                                <Typography variant="body1" textAlign="center" fontWeight="bold">{item}</Typography>
+                            </CardActionArea>
+                        </Link>
+                    </Grid> : <Skeleton key={index} sx={{height: "unset", width: "25%", aspectRatio: "1/.5"}}/>
                 ))}
             </Grid>
         </Box>
