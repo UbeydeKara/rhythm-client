@@ -1,5 +1,7 @@
 // ----------------------------------------------------------------------
 
+import {LinkBehaviour} from "../../components/LinkBehaviour";
+
 export default function Card(theme) {
   return {
     MuiCard: {
@@ -30,5 +32,10 @@ export default function Card(theme) {
         },
       },
     },
+    MuiCardActionArea: {
+      defaultProps: {
+        LinkComponent: LinkBehaviour
+      }
+    }
   };
 }
