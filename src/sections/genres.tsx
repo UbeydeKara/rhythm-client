@@ -23,7 +23,7 @@ export default function Genres() {
             <Grid container spacing={4}>
                 {top_genres.map((item, index) => (
                     <Grid key={index} sx={{width: {xs: "50%", md: "25%"}, aspectRatio: "1/.5"}}>
-                        <CardActionArea sx={cardStyle(item.url)} href={`/genre/${item}`}>
+                        <CardActionArea sx={cardStyle(item.url)} href={`/genre/${item.title}`}>
                             <CardContent sx={contentStyle}>
                                 <Typography variant="h6">{item.title}</Typography>
                             </CardContent>
