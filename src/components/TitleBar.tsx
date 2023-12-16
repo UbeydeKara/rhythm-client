@@ -1,4 +1,4 @@
-import {Box, IconButton, Stack, Typography} from "@mui/material";
+import {Box, IconButton, Skeleton, Stack, Typography} from "@mui/material";
 import {ShuffleIcon} from "@/src/theme/overrides/CustomIcons";
 import {ArrowBack, PlayArrow} from "@mui/icons-material";
 import React from "react";
@@ -43,12 +43,15 @@ export default function TitleBar({avatar, title, subtitle, playlist = [], backBu
                 </IconButton>
             }
 
-            {avatar &&
+            {avatar ?
                 <Box component="img" src={avatar} width={{xs: "90%", sm: "70%", md: "15%"}} mr={{md: 4}}/>
+                : <Skeleton width={170} height={170} sx={{transform: "none"}}/>
             }
 
             <Box>
-                <Typography variant={isDesktop ? "h3" : "h4"}>{title}</Typography>
+                <Typography variant={isDesktop ? "h3" : "h4"}>
+                    {title ? title : <Skeleton width={250}/>}
+                </Typography>
                 <Typography variant="subtitle1" color="text.secondary">{subtitle}</Typography>
             </Box>
 
