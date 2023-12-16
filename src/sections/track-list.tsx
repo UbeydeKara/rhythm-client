@@ -1,4 +1,4 @@
-import {Box, List, ListItemButton, ListItemText, Skeleton, Typography} from "@mui/material";
+import {Box, List, ListItem, ListItemButton, ListItemText, Skeleton, Typography} from "@mui/material";
 import {AlbumTrack} from "@/src/types/AlbumType";
 import {ArtistType} from "@/src/types/ArtistType";
 import {artistNames} from "@/src/utils/artistNames";
@@ -12,6 +12,12 @@ const ItemIcon = ({hoverId, track_number}: {hoverId: number, track_number: numbe
         <ListItemText secondary={<PlayArrow/>} sx={{flex: "none", position: "absolute", left: {xs: 0, md: 15}, top: 17}}/>
         :
         <ListItemText secondary={track_number} sx={{flex: "none", position: "absolute", left: {xs: 5, md: 23}}}/>
+);
+
+const ListItemSkeleton = () => (
+    <ListItem>
+        <Skeleton sx={{transform: "none", width: "100%", height: 50}}/>
+    </ListItem>
 );
 
 export default function TrackList({albumTracks, artists}: {albumTracks: AlbumTrack[], artists: ArtistType[]}) {
@@ -29,12 +35,10 @@ export default function TrackList({albumTracks, artists}: {albumTracks: AlbumTra
                         onMouseLeave={() => setHoverId(-1)} sx={{position: "relative"}}>
             <ItemIcon track_number={item.track_number} hoverId={hoverId}/>
             <Box ml={{xs: 2, md: 5}}>
-                <Typography fontWeight="bold" variant="body2"
-                            sx={{fontSize: {xs: 13, md: 15}, mb: {xs: .5, md: 0}}}>
+                <Typography fontWeight="bold" variant="body2">
                     {item.name}
                 </Typography>
-                <Typography variant="body2" fontWeight={100} color="text.secondary"
-                            sx={{fontSize: {xs: 11, md: 12}}}>
+                <Typography variant="body2" color="text.secondary">
                     {artistNames(artists)}
                 </Typography>
             </Box>
@@ -46,8 +50,7 @@ export default function TrackList({albumTracks, artists}: {albumTracks: AlbumTra
     return(
         <List>
             {albumTracks?.map((item, index) => (
-                item ? <Item key={index} item={item}/>
-                    : <Skeleton key={index} width="100%" height={80}/>
+                item ? <Item key={index} item={item}/> : <ListItemSkeleton key={index}/>
             ))}
         </List>
     );
